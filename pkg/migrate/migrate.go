@@ -62,7 +62,7 @@ func (m *migrate) migrate(t migrationType) error {
 		for _, mi := range m.migrations {
 			if err := m.upMigration(tx, sid, mi); err != nil {
 				tx.Rollback()
-				m.printf("Migration UP failed", mi.ID, err)
+				m.printf("Migration UP failed: %v, %v", mi.ID, err)
 				return err
 			}
 		}
@@ -73,7 +73,7 @@ func (m *migrate) migrate(t migrationType) error {
 			mi := m.migrations[i]
 			if err := m.downMigration(tx, sid, mi); err != nil {
 				tx.Rollback()
-				m.printf("Migration DOWN failed", mi.ID, err)
+				m.printf("Migration DOWN failed: %v, %v", mi.ID, err)
 				return err
 			}
 		}
