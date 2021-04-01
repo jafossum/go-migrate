@@ -78,7 +78,7 @@ func getDB() *sql.DB {
 }
 
 func getMigrations() (migrate.SqlMigrations, error) {
-	// Define miogrations
+	// Define migrations
 	m1, err := migrate.CreateSqlMigration("1",
 		strings.NewReader("CREATE TABLE IF NOT EXISTS "+table+"()"),
 		strings.NewReader("DROP TABLE "+table))

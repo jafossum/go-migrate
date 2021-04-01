@@ -49,7 +49,7 @@ func main() {
 			panic(err)
 		}
 	case "DOWN":
-		// Run UP Migration
+		// Run DOWN Migration
 		if err := mig.MigrateDown(); err != nil {
 			panic(err)
 		}
