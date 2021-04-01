@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS example_test_table_2();

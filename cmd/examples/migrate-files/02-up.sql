@@ -1,0 +1,1 @@
+ALTER TABLE example_test_table_2 ADD id serial;

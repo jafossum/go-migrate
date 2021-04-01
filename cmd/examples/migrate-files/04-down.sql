@@ -1,0 +1,1 @@
+DELETE FROM example_test_table_2 WHERE id = 2;
