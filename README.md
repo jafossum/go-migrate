@@ -1,2 +1,3 @@
 # go-migrate
-Golang simple SQL migration tool
+
+Golang simple PostgreSQL migration tool
