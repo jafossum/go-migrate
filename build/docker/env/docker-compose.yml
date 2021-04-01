@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    # volumes:
+    #   - db-migrate-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: migrate-test
+      POSTGRES_PASSWORD: migrate-test
+      POSTGRES_DB: migrate-test
+      PGDATA: /var/lib/postgresql/data/migrate-test
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+volumes:
+  db-migrate-data:
