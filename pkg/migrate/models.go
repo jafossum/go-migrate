@@ -2,9 +2,14 @@ package migrate
 
 import "database/sql"
 
+const (
+	defaultMigration = "migrations"
+)
+
 type migrate struct {
 	db         *sql.DB
 	migrations SqlMigrations
+	migTable   string
 	debug      bool
 }
 

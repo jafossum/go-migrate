@@ -13,6 +13,7 @@ func New(db *sql.DB, opts ...Option) *migrate {
 	m := &migrate{
 		db:         db,
 		migrations: SqlMigrations{},
+		migTable:   defaultMigration,
 	}
 	// Loop functional options
 	for _, opt := range opts {
@@ -105,7 +106,7 @@ func (m *migrate) upMigration(tx *sql.Tx, stmt *sql.Stmt, mig SqlMigration) erro
 		m.printf("No migration provided")
 		return nil
 	}
-	ins, err := tx.Prepare("INSERT INTO migrations (id) VALUES ($1)")
+	ins, err := tx.Prepare("INSERT INTO " + m.migTable + " (id) VALUES ($1)")
 	if err != nil {
 		return err
 	}
@@ -139,7 +140,7 @@ func (m *migrate) downMigration(tx *sql.Tx, stmt *sql.Stmt, mig SqlMigration) er
 		return nil
 	}
 	// Create prepared statemnt for deleting migration
-	del, err := tx.Prepare("DELETE FROM migrations WHERE id=$1")
+	del, err := tx.Prepare("DELETE FROM " + m.migTable + " WHERE id=$1")
 	if err != nil {
 		return err
 	}
@@ -175,7 +176,7 @@ func loadReader(r io.Reader) func(tx *sql.Tx) error {
 }
 
 func (m *migrate) createMigrationTable() error {
-	_, err := m.db.Exec("CREATE TABLE IF NOT EXISTS migrations (id TEXT PRIMARY KEY )")
+	_, err := m.db.Exec("CREATE TABLE IF NOT EXISTS " + m.migTable + " (id TEXT PRIMARY KEY )")
 	if err != nil {
 		return fmt.Errorf("creating migrations table: %w", err)
 	}

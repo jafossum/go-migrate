@@ -15,3 +15,10 @@ func WithDebugLog() Option {
 		m.debug = true
 	}
 }
+
+// Functional Options
+func WithMigrationTableName(t string) Option {
+	return func(m *migrate) {
+		m.migTable = t
+	}
+}
