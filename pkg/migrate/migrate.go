@@ -49,7 +49,7 @@ func (m *migrate) migrate(t migrationType) error {
 	defer tx.Rollback() // The rollback will be ignored if the tx has been committed later in the function.
 
 	// Create prepared statemnt for finding migration ID
-	sid, err := tx.Prepare("SELECT id FROM migrations WHERE id=$1")
+	sid, err := tx.Prepare("SELECT id FROM " + m.migTable + " WHERE id=$1")
 	if err != nil {
 		return err
 	}

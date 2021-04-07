@@ -19,8 +19,6 @@ const (
 	dbname   = "migrate-test"
 )
 
-const table = "example_test_table_1"
-
 func main() {
 
 	var mode = flag.String("m", "UP", "Mode UP or DOWN")
