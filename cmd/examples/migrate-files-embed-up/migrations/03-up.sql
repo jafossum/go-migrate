@@ -1,0 +1,1 @@
+INSERT INTO example_test_table_3 VALUES (1);
