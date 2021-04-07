@@ -43,6 +43,28 @@ if err != nil {
 mig = append(mig, m)
 ```
 
+## Create Migrations from GO Embed
+
+```go
+//go:embed migrations/*.sql
+var fs embed.FS
+// Define migrations from fileReader
+var mig migrate.SqlMigrations
+fu, err := fs.Open("01d-up.sql")
+if err != nil {
+    return nil, err
+}
+fd, err := fs.Open("01-down.sql")
+if err != nil {
+    return nil, err
+}
+m, err := migrate.CreateSqlMigration("01", fu, fd)
+if err != nil {
+    return nil, err
+}
+mig = append(mig, m)
+```
+
 ## Run Migration
 
 ```go
