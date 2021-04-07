@@ -163,6 +163,9 @@ func CreateSqlMigration(id string, up, down io.Reader) (SqlMigration, error) {
 }
 
 func loadReader(r io.Reader) func(tx *sql.Tx) error {
+	if r == nil {
+		return nil
+	}
 	buf, err := ioutil.ReadAll(r)
 	if err != nil {
 		return func(tx *sql.Tx) error {
